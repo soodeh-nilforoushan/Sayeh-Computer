@@ -1,0 +1,40 @@
+Library ieee;
+use ieee.std_logic_1164.all;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+-- use IEEE.std_logic_arith.all;
+--use ieee.numeric_std.all;
+
+ ENTITY AL IS 
+  PORT (  PCside, Rside : IN std_logic_vector (15 DOWNTO 0);
+          Iside : IN std_logic_vector (7 DOWNTO 0); 
+          ALout : OUT std_logic_vector (15 DOWNTO 0); 
+          ResetPC, PCplusI, PCplus1, RplusI, Rplus0 : IN std_logic);
+   END AL;
+ ARCHITECTURE dataflow of AL IS 
+ 
+ BEGIN 
+   PROCESS (PCside, Rside, Iside, ResetPC,
+     PCplusI, PCplus1, RplusI, Rplus0) 
+    
+ BEGIN 
+  if(resetPc='1') then
+  ALout <= (OTHERS => '0');
+else if(PCplusI='1') then
+  ALout <= (PCside + Iside);
+else if(PCplus1='1') then
+  ALout <= (PCside + '1');
+else if(RplusI='1') then
+ ALout <= (Rside  + Iside);
+else if(Rplus0='1') then
+  ALout <= Rside;
+else 
+  ALout <= PCside;
+end if;
+end if;
+end if;
+end if;
+end if;
+
+ END PROCESS; 
+ END dataflow;
+

@@ -1,0 +1,187 @@
+{C:/Users/User/Desktop/model sim/sayeh/alu.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/alu.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD_UNSIGNED
+-- Compiling entity ALU
+-- Compiling architecture behavioral of ALU
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/sub.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/sub.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_SIGNED
+-- Compiling entity subtraction
+-- Compiling architecture behavioral of subtraction
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/address_logic.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/address_logic.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity AL
+-- Compiling architecture dataflow of AL
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/and.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/and.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity andComp
+-- Compiling architecture Behavioral of andComp
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/IR.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/IR.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity IR
+-- Compiling architecture Behavioral of IR
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/register_file.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/register_file.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity RegisterFile
+-- Compiling architecture Behavioral of RegisterFile
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/data_path.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/data_path.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity datapath
+-- Compiling architecture behavioral of datapath
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/shift-left.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/shift-left.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity shiftleft
+-- Compiling architecture Behavioral of shiftleft
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/sayeh_computer.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/sayeh_computer.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity sayeh_computer
+-- Compiling architecture Behavioral of sayeh_computer
+
+} {} {}} {C:/Users/User/Desktop/model sim/test/pc.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/test/pc.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity PC
+-- Compiling architecture Behavioral of PC
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/add.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/add.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity Addition
+-- Compiling architecture behavioral of Addition
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/status_reg.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/status_reg.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity status_reg
+-- Compiling architecture behavioral of status_reg
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/or.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/or.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity orComp
+-- Compiling architecture behavioral of orComp
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/memory.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/memory.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity memory
+-- Compiling architecture behavioral of memory
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/shift_right.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/shift_right.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity shiftright
+-- Compiling architecture Behavioral of shiftright
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/address_unit.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/address_unit.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity AddressUnit
+-- Compiling architecture dataflow of AddressUnit
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/multiply.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/multiply.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity mulComp
+-- Compiling architecture Behavioral of mulComp
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/comparator.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/comparator.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity comparator
+-- Compiling architecture behavioral of comparator
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/window_pointer.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/window_pointer.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity window_pointer
+-- Compiling architecture behavioral of window_pointer
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/xor.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/xor.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity xorComp
+-- Compiling architecture Behavioral of xorComp
+
+} {} {}} {C:/Users/User/Desktop/model sim/sayeh/2scomplement.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/User/Desktop/model sim/sayeh/2scomplement.vhd}
+Model Technology ModelSim SE-64 vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity twoscompliment
+-- Compiling architecture behavioral of twoscompliment
+
+} {} {}}

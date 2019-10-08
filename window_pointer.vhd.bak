@@ -1,0 +1,35 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.numeric_std.all;
+
+ENTITY window_pointer IS
+  PORT (
+    clk: in std_logic;
+    input : in std_logic_vector(5 downto 0);
+    wpadd : in std_logic;
+    wpreset : in std_logic;
+    output : out std_logic_vector(5 downto 0));
+END window_pointer;
+
+
+ARCHITECTURE behavioral OF window_pointer IS
+  signal temp1: std_logic_vector(5 downto 0);
+  signal temp2: std_logic_vector(5 downto 0);
+ begin
+ process (CLK)
+  begin
+    if (clk'event and clk = '1') then
+     if (wpreset = '1') then
+       output<= "000000";
+     else if (wpadd='1') then
+        temp2<= std_logic_vector(unsigned(temp1)+unsigned(input));
+        temp1<=temp2;
+     end if;
+   end if;
+ output<=temp1;
+end if;
+ end process;
+ end behavioral; 
+
+

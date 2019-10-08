@@ -1,0 +1,56 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.numeric_std.all;
+--use IEEE.std_logic_unsigned.all;
+use IEEE.numeric_std.all;
+
+entity RegisterFile is
+  port (input:in std_logic_vector(15 downto 0);
+        Rd,Rs:out std_logic_vector(15 downto 0);
+        wp :in std_logic_vector(5 downto 0);
+        clk,RFLwrite,RFHwrite:in std_logic;
+        left,right:in std_logic_vector(1 downto 0) );
+        
+      end RegisterFile;
+    architecture Behavioral of RegisterFile is
+          signal leftaddressout,rightaddressout: std_logic_vector(5 downto 0);
+          signal m1 : std_logic_vector(5 downto 0);
+          signal m2 : std_logic_vector(5 downto 0);
+        type registers is array (0 to 63) of std_logic_vector (15 downto 0);
+    
+        signal reg: registers;
+        signal temp: std_logic_vector(15 downto 0);
+   begin
+   m1 <= "0000" & left;
+   m2 <= "0000" & right; 
+       leftaddressout <= std_logic_vector(unsigned( wp) +unsigned( m1));--inja miad wp ro ba 2 bit por arzeshmajool paini jam mikone va adress register az 0 ta 63 ro mide 
+                                    --bad meghdaro az register mikhooe vamirize too left ya RD 
+                                    --ke inja adrese reg maghsad(D) entekhab shod
+       rightaddressout <=std_logic_vector(unsigned( wp) +unsigned( m2));--inja adresse reg mabda(S) entekhab shod.
+       
+       process(clk)
+         begin
+ if (clk'event and clk = '1') then
+         if(RFLwrite='1' and RFHwrite='1') then
+         temp <=input;
+    --      temp <= reg(to_integer(unsigned( leftaddressout)));--meghdare reg destination ra mirizim  to temp
+         else if(RFLwrite='1' and RFHwrite='0') then
+          temp(7 downto 0) <=input( 7 downto 0);
+         else if(RFHwrite='1' and RFLwrite='0') then
+          temp(15 downto 8) <=input(15 downto 8);
+       end if;
+     end if;
+   end if;
+       reg(to_integer(unsigned( leftaddressout)))<=temp;
+ end if;
+end process;
+     
+       Rd<=reg(to_integer(unsigned( leftaddressout)));--meghdar e reg ro rikhtam too Rd
+       Rs<=reg(to_integer(unsigned( rightaddressout)));
+       
+   end Behavioral;
+       
+       
+         
+        

@@ -1,0 +1,286 @@
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+
+ENTITY controller IS
+	PORT (
+		external_reset, clk, memDataReady, cout, zout : IN std_logic;
+		instruction : IN std_logic_vector(15 DOWNTO 0);
+		B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB, wpadd, wpreset, RFLwrite, RFHwrite, IRload, 
+		ResetPC, PCplusI, PCplus1, RplusI, Rplus0, EnablePC, AlUout_on_Databus, Rs_on_AddressUnitRSide, Rd_on_AddressUnitRside, Address_on_databus, 
+		Cset, Creset, Zset, Zreset, SRload, readMem, writeMem : OUT std_logic 
+	);
+END ENTITY;
+
+ARCHITECTURE rtl OF controller IS
+	TYPE state IS (fetch, decode, nop, halt);
+	SIGNAL current_state : state;
+	SIGNAL next_state : state;
+BEGIN
+	-- next to current
+	PROCESS (clk, external_reset)
+	BEGIN
+		IF external_reset = '1' THEN
+			current_state <= fetch;
+		ELSIF clk'EVENT AND clk = '1' THEN
+			current_state <= next_state;
+		END IF;
+	END PROCESS;
+
+	-- next based on state
+	PROCESS (current_state)
+		BEGIN
+			CASE current_state IS
+				WHEN fetch => 
+					readMem <= '1';
+					IRload <= '1';
+					wpAdd <= '1';
+					PCplus1 <= '1';
+					EnablePC <= '1';
+ 
+					B15to0 <= '0';
+					AandB <= '0';
+					AorB <= '0';
+					notB <= '0';
+					shlB <= '0';
+					shrB <= '0';
+					AaddB <= '0';
+					AsubB <= '0';
+					AmulB <= '0';
+					AcmpB <= '0';
+					wpreset <= '0';
+					RFLwrite <= '0';
+					RFHwrite <= '0';
+					ResetPC <= '0';
+					PCplusI <= '0';
+					RplusI <= '0';
+					Rplus0 <= '0';
+					Rs_on_AddressUnitRSide <= '0';
+					Rd_on_AddressUnitRSide <= '0';
+					Cset <= '0';
+					Creset <= '0';
+					Zset <= '0';
+					Zreset <= '0';
+					SRload <= '0';
+					ALUout_on_Databus <= '0';
+					address_on_databus <= '0';
+					next_state <= decode;
+ 
+				WHEN decode => 
+ 
+					IF (instruction(15 DOWNTO 8) = "00000000") THEN
+						next_state <= nop;
+					
+					ELSIF (instruction(15 DOWNTO 8) = "00000001") THEN
+						next_state <= halt;
+					
+					ELSIF (instruction(15 DOWNTO 8) = "00000010") THEN
+						Zset <= '1';
+						next_state <= fetch;
+					
+ 
+					ELSIF (instruction(15 DOWNTO 8) = "00000011") THEN
+						Zreset <= '1';
+						next_state <= fetch;
+					
+					ELSIF (instruction(15 DOWNTO 8) = "00000100") THEN
+						Cset <= '1';
+						next_state <= fetch;
+					
+					ELSIF (instruction(15 DOWNTO 8) = "00000101") THEN
+						Creset <= '1';
+						next_state <= fetch;
+					
+					ELSIF (instruction(15 DOWNTO 8) = "00000110") THEN
+						wpreset <= '1';
+						next_state <= fetch;
+					
+					--mvr:move the value stored in Rs to Rd
+					ELSIF (instruction(15 DOWNTO 12) = "0001") THEN
+						B15to0 <= '1';
+						ALUout_on_databus <= '1';
+						RFLwrite <= '1';
+						RFHwrite <= '1';
+						SRload <= '1';
+						next_state <= fetch;
+					
+ 
+					--lda: By this instruction you can load the value stored Rs?th row of memory to Rd.
+					ELSIF (instruction(15 DOWNTO 12) = "0010") THEN
+						Rs_on_AddressUnitRside <= '1';
+						Rplus0 <= '1';
+						readMem <= '1';
+						EnablePc <= '1'; --??in lazeme inja benazam
+						next_state <= fetch;
+					
+ 
+					--sta:store Rs to Rd'th memry
+					ELSIF (instruction(15 DOWNTO 12) = "0011") THEN
+ 
+						B15to0 <= '1';
+						ALUout_on_databus <= '1';
+						Rd_on_AddressUnitRside <= '1';
+						Rplus0 <= '1';
+						EnablePc <= '1'; --??in lazeme inja benazam
+						WriteMem <= '1';
+						next_state <= fetch;
+					
+ 
+					--and
+					ELSIF (instruction(15 DOWNTO 12 ) = "0110") THEN
+						AandB <= '1';
+						SRload <= '1';
+						AlUout_on_Databus <= '1';
+						RFLwrite <= '1';
+						RFHwrite <= '1';
+ 
+						next_state <= fetch;
+					
+					--or
+					ELSIF (instruction(15 DOWNTO 12) = "0111") THEN
+						AorB <= '1';
+						SRload <= '1';
+						AlUout_on_Databus <= '1';
+						RFLwrite <= '1';
+						RFHwrite <= '1';
+ 
+						next_state <= fetch;
+ 
+					--not
+					ELSIF (instruction(15 DOWNTO 12) = "1000") THEN
+						notB <= '1';
+						SRload <= '1';
+						AlUout_on_Databus <= '1';
+						-- Rplus0<='1';
+						next_state <= fetch;
+					
+					--shlB
+					ELSIF (instruction(15 DOWNTO 12) = "1001") THEN
+						shlB <= '1';
+						AlUout_on_Databus <= '1';
+						RFLwrite <= '1';
+						RFHwrite <= '1';
+						-- Rplus0<='1';
+						next_state <= fetch;
+					
+					--shRB
+					ELSIF (instruction(15 DOWNTO 12) = "1010") THEN
+						shRb <= '1';
+						AlUout_on_Databus <= '1';
+						RFLwrite <= '1';
+						RFHwrite <= '1';
+						-- Rplus0<='1';
+						next_state <= fetch;
+			
+					--AaddB
+					ELSIF (instruction(15 DOWNTO 12) = "1011") THEN
+						AaddB <= '1';
+						SRload <= '1';
+						AlUout_on_Databus <= '1';
+						RFLwrite <= '1';
+						RFHwrite <= '1';
+ 
+						next_state <= fetch;
+				
+					--Asubb
+					ELSIF (instruction(15 DOWNTO 12) = "1100") THEN
+						AsubB <= '1';
+						SRload <= '1';
+						AlUout_on_Databus <= '1';
+						RFLwrite <= '1';
+						RFHwrite <= '1';
+ 
+						next_state <= fetch;
+				
+					--A mulB
+					ELSIF (instruction(15 DOWNTO 12) = "1101") THEN
+						AmulB <= '1';
+						SRload <= '1';
+						AlUout_on_Databus <= '1';
+						RFLwrite <= '1';
+						RFHwrite <= '1';
+ 
+						next_state <= fetch;
+				
+					--comp
+					ELSIF (instruction(15 DOWNTO 12) = "1110") THEN
+						AcmpB <= '1';
+						AlUout_on_Databus <= '1';
+						SRload<='1';
+						RFLwrite <= '1';
+						RFHwrite <= '1';
+ 
+						next_state <= fetch;
+					
+					--mil:move immidiate low
+					ELSIF (instruction(15 DOWNTO 12) = "1111" AND instruction(9 DOWNTO 8) = "00") THEN
+						-- AmulB<='1';
+						-- AlUout_on_Databus<='1';
+						RFLwrite <= '1';
+						Address_on_databus <= '1';
+						next_state <= fetch;
+					
+					--mih:move immidiate high
+					ELSIF (instruction(15 DOWNTO 12) = "1111" AND instruction(9 DOWNTO 8) = "01") THEN
+						RFHwrite <= '1';
+						Address_on_databus <= '1';
+						next_state <= fetch;
+					
+					--spc:store pc to Rd  :Rd<=pc+I
+					ELSIF (instruction(15 DOWNTO 12) = "1111" AND instruction(9 DOWNTO 8) = "10") THEN
+						pcplusI <= '1';
+						Address_on_databus <= '1';
+						RFLwrite <= '1';
+						RFLwrite <= '1';
+						Rd_on_addressUnitRside <= '1';
+						next_state <= fetch;
+					
+					--jpa:jump address:PC<=Rd+I
+					ELSIF (instruction(15 DOWNTO 12) = "1111" AND instruction(9 DOWNTO 8) = "11") THEN
+						-- pcplus1<='1';
+						RplusI <= '1';
+						-- Address_on_databus<='1';
+						Rd_on_addressUnitRside <= '1';
+ 
+						next_state <= fetch;
+					
+					--jpr:PC<=PC+I
+					ELSIF (instruction(15 DOWNTO 8) = "00000111") THEN
+						pcplusi <= '1';   --EablePc<='1';  nemikahad??
+						
+						next_state <= fetch;
+					
+					--brz
+					ELSIF (instruction(15 DOWNTO 8) = "00001000") THEN
+						IF (zout = '1') THEN
+							pcplusi <= '1';
+							next_state <= fetch;
+						END IF;
+					
+ 
+					--brc:branch if carry
+					ELSIF (instruction(15 DOWNTO 8) = "00001001") THEN
+						IF (Cout = '1') THEN
+							pcplusi <= '1';
+							next_state <= fetch;
+						END IF;
+ 
+					--awp:add window pointer
+					ELSIF (instruction(15 DOWNTO 8) = "00001010") THEN
+						wpAdd <= '1';
+						next_state <= fetch;
+						
+					END IF;
+ 
+				WHEN nop => 
+					next_state <= fetch;
+ 
+				WHEN halt => 
+					IF External_reset = '1' THEN
+						next_state <= fetch;
+					ELSE
+						next_state <= halt;
+					END IF;
+ 
+			END CASE;
+		END PROCESS;
+END ARCHITECTURE;

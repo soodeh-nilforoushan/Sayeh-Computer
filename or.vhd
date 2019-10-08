@@ -1,0 +1,15 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+
+entity orComp is
+    Port ( A : in  STD_LOGIC_VECTOR (15 downto 0);
+           B : in  STD_LOGIC_VECTOR (15 downto 0);
+           aluOut : out  STD_LOGIC_VECTOR (15 downto 0));
+end orComp;
+
+architecture behavioral of orComp is
+begin
+  aluOut<=A or B;
+end   behavioral;

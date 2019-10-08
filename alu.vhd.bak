@@ -1,0 +1,141 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use ieee.numeric_std_unsigned.all;
+
+entity ALU is
+port (A,B: in std_logic_vector(15 downto 0);
+      B15to0,AandB,AorB,NotB,AaddB,AsubB,AmulB,AcmpB,ShrB,ShlB:in std_logic;
+      zout,cout: out std_logic;--zout:becomes one when the ALU?s output is zero
+                               --cout: becomes one when the ALU?s output has got carry digit
+      aluOut: out std_logic_vector(15 downto 0);
+      cin   : in  std_logic);
+    end ALU;
+      
+architecture behavioral of ALU is
+    component Addition port(a, b :in std_logic_vector (15 downto 0);
+        c0:  in std_logic;
+       sum : out std_logic_vector (15 downto 0);
+       cout: out std_logic);
+      end component;
+    
+     component subtraction   port (a,b :in  std_logic_vector(15 downto 0);
+        cin: in  std_logic;
+        sub :out  std_logic_vector(15 downto 0);
+        cout :out std_logic);
+      end component;
+      
+     component andComp   Port ( Rs : in  STD_LOGIC_VECTOR (15 downto 0);
+           Rd : in  STD_LOGIC_VECTOR (15 downto 0);
+           aluOut : out  STD_LOGIC_VECTOR (15 downto 0));
+      end component;
+    
+     component orComp  Port ( A : in  STD_LOGIC_VECTOR (15 downto 0);
+           B : in  STD_LOGIC_VECTOR (15 downto 0);
+           aluOut : out  STD_LOGIC_VECTOR (15 downto 0));
+         end component;
+         
+     component xorComp   Port ( Rs : in  STD_LOGIC_VECTOR (15 downto 0);
+           Rd : in  STD_LOGIC_VECTOR (15 downto 0);
+           aluOut : out  STD_LOGIC_VECTOR (15 downto 0));
+         end component;
+         
+    component shiftleft Port ( A : in  STD_LOGIC_VECTOR (15 downto 0);
+           B : out  STD_LOGIC_VECTOR (15 downto 0));  
+         end component;
+         
+    component shiftright Port ( Rs : in  STD_LOGIC_VECTOR (15 downto 0);
+           Rd : out  STD_LOGIC_VECTOR (15 downto 0)); 
+         end component;
+         
+     component comparator  Port ( A : in  STD_LOGIC_VECTOR (15 downto 0);
+           B : in  STD_LOGIC_VECTOR (15 downto 0);
+           zout,cout: out  STD_LOGIC;
+           aluout :out STD_LOGIC_VECTOR (15 downto 0));
+         end component;
+         
+     component mulComp Port ( A : in  STD_LOGIC_VECTOR (7 downto 0);
+           B : in  STD_LOGIC_VECTOR (7 downto 0);
+           res : out  STD_LOGIC_VECTOR (15 downto 0));
+         end component;
+
+         
+ --   component twoscompliment port(A : in std_logic_vector (Nbits-1 downto 0);
+   --        aluout : out std_logic_vector (Nbits downto 0));
+     --    end component;
+         
+       signal add_res,sub_res,and_res,or_res,comp_res,shiftL_res,mul_res,
+               shiftR_res:std_logic_vector(0 to 15);   
+       signal cout_add,cout_sub,cout_comp:std_logic;
+      
+        begin
+          
+          x1: Addition port map (A,B,cin,add_res,cout_add);
+          x2:Subtraction port map (A,B,cin,sub_res,cout_sub );
+          x3:andComp port map (A,B,and_res);
+          x4:orComp port map (A,B,or_res); 
+          x5:mulComp port map(A(7 downto 0),B(7 downto 0),mul_res);
+          x6:comparator port map (A,B,zout,cout_comp,comp_res);
+          x7:shiftleft port map (A,shiftL_res);
+          x8:shiftright  port map (A,shiftR_res);
+            
+process (B15to0,AandB,AorB,NotB,AaddB,AsubB,AmulB,AcmpB,ShrB,ShlB)
+        begin
+   
+      if(B15to0='1') then
+      aluout<=B;
+       zout<='0';
+       cout<='0';
+     elsif(AaddB = '1') then
+      aluout<=add_res;
+      cout<=cout_add;
+      zout<='0';
+      
+       elsif (AsubB = '1') then
+      aluout<=sub_res;
+      cout<=cout_sub ;
+      zout<='0';
+    
+       elsif(AandB ='1') then 
+      aluout<=and_res;
+       zout<='0';
+       cout<='0';
+ 
+      elsif(AorB ='1') then
+      aluout<=or_res;
+       zout<='0';
+       cout<='0';
+ 
+    elsif(notB='1') then
+    aluout<= not B;
+      zout<='0';
+       cout<='0';
+
+       elsif(AmulB ='1' ) then
+      aluout<=mul_res;
+       zout<='0';
+       cout<='0';
+ 
+       elsif(AcmpB ='1')  then
+      aluout<=comp_res;
+      cout<=cout_comp;
+       zout<='0';
+   
+       elsif(ShlB ='1') then
+      aluout<=shiftL_res;
+       zout<='0';
+       cout<='0';
+
+      elsif(ShrB ='1') then
+      aluout<=shiftR_res;
+       zout<='0';
+       cout<='0';
+end if;
+ end process;
+end behavioral;
+  
+      
+        
+          
+    
+
+
